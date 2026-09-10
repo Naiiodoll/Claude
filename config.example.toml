@@ -1,0 +1,56 @@
+# compliant-scraper example configuration.
+#
+# This example targets https://quotes.toscrape.com — a public "scraping
+# sandbox" explicitly provided for learning and practising web scraping.
+# Always review a target site's robots.txt and Terms of Service before
+# scraping it for real.
+
+name = "quotes-example"
+
+# Identify yourself honestly. Include a URL or email where the site owner can
+# reach you. Bots with generic/empty user-agents are more likely to be blocked.
+user_agent = "CompliantScraper/0.1 (+https://github.com/yourname/compliant-scraper)"
+
+# Start URLs — the scraper will begin at each one.
+start_urls = ["https://quotes.toscrape.com/"]
+
+# Optional: restrict crawling to these hosts (case-insensitive). Uncomment to
+# prevent accidental off-site requests when following pagination links.
+# allowed_domains = ["quotes.toscrape.com"]
+
+# Politeness controls.
+delay = 2.0          # minimum seconds between requests to the same host
+timeout = 15.0       # per-request timeout (seconds)
+max_retries = 3      # how many times to retry transient failures
+backoff_base = 1.0   # base seconds for exponential backoff (1s -> 2s -> 4s ...)
+
+# What constitutes one "item" on the page, and which fields to extract.
+[item]
+selector = "div.quote"          # CSS selector that matches one item
+
+# Each field: a CSS selector relative to the item element.
+#   attribute = "text"      -> use the element's text content
+#   attribute = "href"/"src" -> use that HTML attribute's value
+#   multiple = true          -> return a list of all matches
+[[item.fields]]
+name = "text"
+selector = "span.text"
+attribute = "text"
+
+[[item.fields]]
+name = "author"
+selector = "small.author"
+attribute = "text"
+
+[[item.fields]]
+name = "tags"
+selector = "a.tag"
+attribute = "text"
+multiple = true
+
+# Pagination: how to find the "next page" link. Set max_pages to cap how many
+# pages are followed per start URL (a hard safety limit).
+[pagination]
+selector = "li.next a"
+attribute = "href"
+max_pages = 3
