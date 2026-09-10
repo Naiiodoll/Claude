@@ -1,5 +1,9 @@
 # compliant-scraper
 
+[![tests](https://github.com/Naiiodoll/Claude/actions/workflows/tests.yml/badge.svg)](https://github.com/Naiiodoll/Claude/actions/workflows/tests.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A polite, configurable web scraper in Python that treats websites the way you'd
 want your own site to be treated. You describe **what** to scrape in a small
 TOML file; the framework handles the *responsible* parts for you.
